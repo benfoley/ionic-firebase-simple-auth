@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>upload</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf="user">
+    hi
+    {{ user.displayName }}
+  </div>
+
+  <input
+    #input
+    type="file"
+    accept="text/xml, application/xml"
+    (change)="fileChange($event)"
+    />
+
+</ion-content>
