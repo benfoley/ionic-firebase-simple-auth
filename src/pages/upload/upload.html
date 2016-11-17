@@ -19,11 +19,25 @@
     {{ user.displayName }}
   </div>
 
+  <!-- upload input -->
+
   <input
     #input
     type="file"
-    accept="text/xml, application/xml"
     (change)="fileChange($event)"
     />
+
+  <!-- upload progress -->
+
+  <div *ngIf="100 > progress > 0">
+    <p>progress {{ progress }} %</p>
+    <spinner class="middle center"></spinner>
+  </div>
+
+  <!-- upload done -->
+
+  <div *ngIf="progress >= 100">
+    <p>{{ state }} </p>
+  </div>
 
 </ion-content>

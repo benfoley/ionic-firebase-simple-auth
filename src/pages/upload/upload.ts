@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../providers/auth-service'
-import { Util } from '../../providers/util'
+import { DataService } from '../../providers/data-service'
 import firebase from 'firebase'
 
 @Component({
@@ -11,11 +11,12 @@ export class UploadPage {
 
   files: File[]
   user: any
-  storageRef: any
+  state: string
+  progress: string
 
   constructor(
       public authService: AuthService,
-      private util: Util
+      public dataService: DataService
     ) {
     this.user = firebase.auth().currentUser
   }
@@ -30,28 +31,28 @@ export class UploadPage {
   }
 
   processFile (file, readerResult) {
-    let textFileAsBlob = new Blob([readerResult], { type: 'text/xml' })
+
+    let textFileAsBlob = new Blob([readerResult])
     let metadata = {
       contentType: 'text/xml',
       desc: 'some XML',
       lastModified: file.lastModified,
       originalName: file.name
     }
-    this.upload(textFileAsBlob, metadata)
-  }
+    const { uploadTask, done } = this.dataService.upload(textFileAsBlob, metadata)
 
+    uploadTask.on('state_changed', (snapshot) => {
+      // Observe state change events such as progress, pause, and resume
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.progress = percent.toFixed(2);
+    })
 
-  upload(file, metadata) {
-    // where to put the files
-    this.storageRef = firebase.storage().ref('/files/' + this.user.uid)
+    done.then((url) => {
+      this.state = 'upload complete'
+      console.log( 'uploading done then url', url )
+    })
 
-    // make a new ID for this upload
-    let newId = this.util.makeId()
-
-    console.log('uploading', newId)
-
-    // do something with the file contents
-    this.storageRef.child(newId).put(file, metadata)
   }
 
   logout () {

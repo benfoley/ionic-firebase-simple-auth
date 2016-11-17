@@ -4,20 +4,18 @@ import { MyApp } from './app.component'
 import { HomePage } from '../pages/home/home'
 import { LoginPage } from '../pages/login/login'
 import { UploadPage } from '../pages/upload/upload'
+import { SpinnerComponent } from '../components/spinner/spinner'
+
 
 // providers
 import { AuthService } from '../providers/auth-service'
+import { DataService } from '../providers/data-service'
 import { Util } from '../providers/util'
 
 // Import the AF2 Module
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
 
 export const firebaseConfig = {
-  // apiKey: "YOUR VALUES HERE",
-  // authDomain: "YOUR VALUES HERE",
-  // databaseURL: "YOUR VALUES HERE",
-  // storageBucket: "YOUR VALUES HERE",
-  // messagingSenderId: "YOUR VALUES HERE"
 }
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -30,7 +28,8 @@ const myFirebaseAuthConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    UploadPage
+    UploadPage,
+    SpinnerComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -45,6 +44,7 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     AuthService,
+    DataService,
     Util
   ]
 })
