@@ -2,11 +2,42 @@
 
   <ion-navbar>
     <ion-title>upload</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    signed-in
+
+  <div *ngIf="user">
+    hi
+    {{ user.displayName }}
+  </div>
+
+  <!-- upload input -->
+
+  <input
+    #input
+    type="file"
+    (change)="fileChange($event)"
+    />
+
+  <!-- upload progress -->
+
+  <div *ngIf="100 > progress > 0">
+    <p>progress {{ progress }} %</p>
+    <spinner class="middle center"></spinner>
+  </div>
+
+  <!-- upload done -->
+
+  <div *ngIf="progress >= 100">
+    <p>{{ state }} </p>
+  </div>
+
 </ion-content>

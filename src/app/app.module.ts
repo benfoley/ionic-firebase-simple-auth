@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-
+import { ComponentsModule } from '../components/components.module'
 
 // Import the AF2 Module
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
@@ -35,6 +35,7 @@ const myFirebaseAuthConfig = {
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
   ],

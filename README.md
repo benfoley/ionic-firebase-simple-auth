@@ -1,10 +1,19 @@
-Ionic2 Firebase Authentication example
+Ionic Firebase Authentication example
 =====
 
-Simple demo of Firebase in Ionic2
+Simple demo of Firebase in Ionic
 
+Updated for Ionic 3.0.1
 
 ## Setup
+
+Get the code, install packages, run it
+
+    git clone ...
+    cd ...
+    npm install
+    ionic serve
+
 
 ### Firebase project
 
@@ -17,35 +26,17 @@ Enable Google as an authentication method (Authentication > Sign-In Method)
 From the project Overview, click 'Add Firebase to your web app'. 
 We'll need these config key:values later...
 
+Set the Firebase storage to enable file upload too. 
+https://console.firebase.google.com/project/PROJECT-NAME/storage/files
 
-### Ionic2 project
 
-Create a new Ionic2 project (or git clone this one).
-At the time of writing, Ionic2 is at RC2 and is using Webpack for its build process.
 
-    ionic start AppName blank --v2
-    cd AppName
-
-Install Angularfire2 packages
-
-    npm install angularfire2 --save
-
-We use both AngularFire and Firebase, so I'd usually install them both. But it seems that typescript is having issues with duplicate identifiers, so for now, just install angularfire2 which will install firebase as one of its dependencies.
-
-### Add a new page for Login
-
-    ionic g page login
-
-### Auth provider
-
-Copy the auth provider code into new `src/providers` directory
+# What do the pages do
 
 ### Module imports
 
 Import LoginPage, AuthService provider and angularfire2's AngularFireModule, AuthProviders, AuthMethods into `src/app/app.module.ts`. Add the config details. Add the new login page to the declarations and entryComponents. 
 Add `AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)` into the imports: array. This initialises the firebase app with the config settings.
-
-# What do the pages do
 
 ### App.component.ts
 
@@ -62,11 +53,3 @@ Just shows our displayname, from the authentication provider
 ### Upload page
 
 User can select an xml file. The file contents are read and uploaded to a `files/userId` directory on Firebase Storage. No feedback yet about upload progress.
-
-## Run
-
-Get the code, install packages, run it
-
-    git clone git@github.com:benfoley/ionic2-firebase-simple-auth.git
-    npm install
-    ionic serve
