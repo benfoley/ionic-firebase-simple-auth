@@ -1,13 +1,21 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service'
 
+
+@IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
-export class LoginPage {
+export class Login {
 
-  constructor( private authService: AuthService ) {}
+  constructor( private authService: AuthService ) {
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad Login');
+  }
 
   loginWith(event, provider) {
     this.authService._webLogin(event, provider)

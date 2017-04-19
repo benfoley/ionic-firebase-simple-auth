@@ -1,21 +1,27 @@
-import { NgModule } from '@angular/core'
-import { IonicApp, IonicModule } from 'ionic-angular'
-import { MyApp } from './app.component'
-import { HomePage } from '../pages/home/home'
-import { LoginPage } from '../pages/login/login'
-import { UploadPage } from '../pages/upload/upload'
-import { SpinnerComponent } from '../components/spinner/spinner'
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
+import { MyApp } from './app.component';
+
+
+// Import the AF2 Module
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
 
 // providers
 import { AuthService } from '../providers/auth-service'
 import { DataService } from '../providers/data-service'
 import { Util } from '../providers/util'
 
-// Import the AF2 Module
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
-
 export const firebaseConfig = {
+    apiKey: "<your details here>",
+    authDomain: "<your details here>",
+    databaseURL: "<your details here>",
+    projectId: "<your details here>",
+    storageBucket: "<your details here>",
+    messagingSenderId: "<your details here>"
 }
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -25,27 +31,24 @@ const myFirebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    UploadPage,
-    SpinnerComponent
+    MyApp
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
-],
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    UploadPage
+    MyApp
   ],
   providers: [
     AuthService,
     DataService,
-    Util
+    Util,
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

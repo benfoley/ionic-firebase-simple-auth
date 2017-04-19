@@ -1,19 +1,19 @@
-import { Component } from '@angular/core'
-import { AuthService } from '../../providers/auth-service'
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
+@IonicPage()
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
-export class HomePage {
+export class Home {
 
-  user: any
-
-  constructor( public authService: AuthService ) {
-    this.user = firebase.auth().currentUser
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  logout () {
-    this.authService.logout()
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad Home');
   }
+
 }
